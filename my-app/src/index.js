@@ -1,14 +1,53 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 let money = 150;
-let cards = Array(53).fill(0);
+//let cards = Array(53).fill(0);
 
 const Status = () =>{
-    let bet = 0;
-    let unit = 15;
+   let [bet, setBet] = useState(0);
+   let [unit, setUnit] = useState(15);
+
+   const addBet = () =>{
+       console.log("addBet");
+       if((bet + unit) > money)
+       {
+           setBet(money);
+       }
+       else
+       {
+           setBet(bet + unit);
+       }
+   }
+
+    const subtractBet = () =>{
+        console.log("subtractBet");
+        if((bet - unit) < 0)
+        {
+            setBet(0);
+        }
+        else
+        {
+            setBet(bet - unit);
+        }
+    }
+
+    const subtractUnit = () => {
+        console.log("subtractUnit");
+        if((unit - 5) <= 0)
+        {
+            setUnit(5);
+        }
+        else
+        {
+            setUnit(unit - 5);
+        }
+    }
+    const addUnit = () =>{
+       setUnit(unit + 5);
+    }
 
     return(
         <div style={{width: "94vw", height:"300px", textAlign: "center", margin: "3rem" }}>
@@ -16,27 +55,27 @@ const Status = () =>{
             <br/>
             Bet ${bet}
             <br/>
-            <button>+</button>
-            <button>-</button>
+            <button onClick={addBet}>+</button>
+            <button onClick={subtractBet}>-</button>
             <br/>
-            <button style={{float:"left"}}>+</button>
+            <button style={{float:"left"}} onClick={addUnit}>+</button>
             <br/>
             <div style={{float:"left", margin: "0", position: "relative", left: "-25px"}}> Unit ${unit}</div>
             <br/>
-            <button style={{float: "left"}}>-</button>
+            <button style={{float: "left"}} onClick={subtractUnit} >-</button>
         </div>
     );
 
 }
 
-const Dealer = () =>{
-
-}
-
-const Player = () =>{
-
-
-}
+// const Dealer = () =>{
+//
+// }
+//
+// const Player = () =>{
+//
+//
+// }
 
 const Game = () =>{
 
