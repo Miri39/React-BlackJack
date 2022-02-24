@@ -1,4 +1,5 @@
 body {
+  overflow-x: hidden;
   background: #4ba86f;
   margin: 0;
   padding: 0;
@@ -12,4 +13,33 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.cards{
+  position: relative;
+  top: -256px;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  float: left;
+}
+
+.card{
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  width: 128px;
+  height: 200px;
+  background: lightyellow;
+}
+
+.turnedCard{
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  width: 128px;
+  height: 200px;
+  background: lightblue;
 }

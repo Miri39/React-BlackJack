@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 let money = 150;
+const sympol = ["spades", "clubs", "hearts", "diamonds"];
 //let cards = Array(53).fill(0);
+
+const DrawCard = () =>{
+    return Math.floor((Math.random() * 100) % 52)
+}
 
 const Status = () =>{
    let [bet, setBet] = useState(0);
@@ -14,6 +19,7 @@ const Status = () =>{
        console.log("addBet");
        if((bet + unit) > money)
        {
+
            setBet(money);
        }
        else
@@ -68,22 +74,58 @@ const Status = () =>{
 
 }
 
-// const Dealer = () =>{
-//
-// }
-//
-// const Player = () =>{
-//
-//
-// }
+const Dealer = () =>{
+    let d = [DrawCard()];
+    let [dealerCards, setDealerCards] = useState(d);
+
+
+
+    return(
+        <div className={"cards"}>
+            {dealerCards.map(x => <div key={x} className={"card"}>{sympol[x % 4]}  {1 + Math.floor(x / 4)} {sympol[x % 4]}</div>)}
+            <div className={"turnedCard"}>B</div>
+        </div>
+    )
+    ;
+}
+
+const Player = () =>{
+
+    let [playerCards, setPlayerCards] = useState([DrawCard(), DrawCard()]);
+    let d = playerCards;
+    const hit = () => {
+      d.push(DrawCard());
+      setPlayerCards([...d]);
+      console.log(playerCards);
+
+    }
+    const finish = () =>{
+
+    }
+
+    return(
+        <div>
+        <div className={"cards"}>
+            {playerCards.map(x => <div key={x*DrawCard()} className={"card"}>{sympol[x % 4]}  {1 + Math.floor(x / 4)} {sympol[x % 4]}</div>)}
+
+        </div>
+            <div className={"cards"}>
+            <button onClick={hit}>Hit</button>
+            <button>Finish</button>
+            </div>
+        </div>
+    )
+        ;
+
+}
 
 const Game = () =>{
 
     return(
         <div>
             <Status/>
-            {/*<Dealer/>*/}
-            {/*<Player/>*/}
+            <Dealer/>
+            <Player/>
         </div>
     )
 }
